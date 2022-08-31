@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<ExpensAce.Models.Category>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["PageTitle"] = "Categories";
+    ViewData["PageActionText"] = "+ Add category";
+    ViewData["PageActionUrl"] = "Category/AddOrEdit";
 }
 
 <div class="row">
@@ -39,9 +41,9 @@
         </a>
         <form action="/Category/Delete/${CategoryId}" method="post">
             @Html.AntiForgeryToken()
-            <a onclick="return confirm(&quot;Are you sure want to delete ${TitleWithIcon} ? &quot;)" class="btn btn-sm">
+            <button onclick="return confirm(&quot;Are you sure want to delete ${TitleWithIcon} ? &quot;)" type="submit" class="btn btn-sm btn-link no-a-decoration">
                <i class="fa-solid fa-trash fa-lg text-danger"></i>
-            </a>
+            </button>
         </form>
     </div>
 </script>

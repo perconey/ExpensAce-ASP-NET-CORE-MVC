@@ -9,9 +9,11 @@ namespace ExpensAce.Models
         public Int32 CategoryId { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Provide name")]
         public String Title { get; set; }
 
         [Column(TypeName = "nvarchar(5)")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Provide icon")]
         public String Icon { get; set; } = "";
 
         [Column(TypeName = "nvarchar(10)")]

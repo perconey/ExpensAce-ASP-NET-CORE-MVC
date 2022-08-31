@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ExpensAce</title>
+    <title>ExpensAce</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="https://cdn.syncfusion.com/ej2/20.2.43/bootstrap5-dark.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -15,6 +15,9 @@
     <script src="https://cdn.syncfusion.com/ej2/20.2.43/dist/ej2.min.js"></script>
 </head>
 <body class="e-bigger">
+
+    <partial name="_SideBar"></partial>
+
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -38,8 +41,35 @@
     </header>
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="@(ViewData["isDashboard"] == null ? "col-md-10" : "col-md-12")">
                 <main role="main" class="pb-3">
+                    @{
+                        if (ViewData["isDashboard"] == null)//show breadcrumb not in dashboard
+                        {
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="d-flex flex-column mb-5">
+                                        <div class="d-flex mb-1">
+                                            <div class="flex-grow-1">
+                                                <h3 class="fw-bold">@ViewData["PageTitle"]</h3>
+                                            </div>
+                                            <div>
+                                                @if (ViewData["PageActionText"] != null)
+                                                {
+                                                    <a class="btn btn-success text-white" href="@ViewData["PageActionUrl"]">
+                                                        @ViewData["PageActionText"]
+                                                    </a>
+                                                }
+                                            </div>
+                                        </div>
+                                        <ejs-breadcrumb id="breadcrumb" separatorTemplate="@Html.Raw("<span class='fa-solid fa-angle-right'></span>'")">
+
+                                        </ejs-breadcrumb>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
                     @RenderBody()
                 </main>
             </div>
